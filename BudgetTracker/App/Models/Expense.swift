@@ -7,9 +7,18 @@
 
 import Foundation
 
-struct Expense {
+struct Expense: Identifiable {
+    var id: UUID = UUID()
     var title: String
     var amount: Double
     var date: Date = Date()
     var category: Category
+    
+    var dateString: String {
+        date.formatted(.dateTime)
+    }
+    
+    var amountString: String {
+        String(format: "$%.02f", amount)
+    }
 }

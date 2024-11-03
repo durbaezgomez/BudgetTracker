@@ -10,5 +10,15 @@ enum Category {
     case utilities
     case travel
     case savings
-    case other
+    case others
+    
+    var title: String {
+        switch self {
+        case .food: return "Food"
+        case .utilities: return "Utilities"
+        case .travel: return "Travel"
+        case .savings: return "Savings"
+        case .others: return "Other"
+        }
+    }
 }

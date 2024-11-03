@@ -26,16 +26,19 @@ struct MainView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            TabView(selection: $selectedTab) {
-                StatsView()
-                    .tag(0)
-                HomeView()
-                    .tag(1)
-                BudgetView()
-                    .tag(2)
-            }
-            
-            ZStack {
+            VStack(spacing: 0) {
+                TabView(selection: $selectedTab) {
+                    StatsView()
+                        .tag(0)
+                    HomeView()
+                        .tag(1)
+                    BudgetView()
+                        .tag(2)
+                }
+                .ignoresSafeArea()
+                .animation(.easeInOut, value: selectedTab)
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                
                 HStack {
                     ForEach(TabItem.allCases, id: \.self) { item in
                         MenuButton(isSelected: selectedTab == item.rawValue, icon: item.icon)
@@ -46,8 +49,10 @@ struct MainView: View {
                             }
                     }
                 }
+                .padding(.top, 20)
+                .frame(maxWidth: .infinity)
+                .background(Color.secondary.opacity(0.5))
             }
-            .animation(.default, value: selectedTab)
         }
     }
 }
@@ -64,12 +69,12 @@ extension MainView {
             Image(systemName: icon)
                 .resizable()
                 .scaledToFit()
-                .foregroundStyle(Color.primary.opacity(isSelected ? 0.7 : 0.3))
+                .foregroundStyle(Color.primary.opacity(isSelected ? 1 : 0.6))
                 .frame(width: size, height: size)
                 .padding(20)
-                .background(Color.gray.opacity(0.1))
+                .background(Color.white)
                 .cornerRadius(10)
-                .animation(.default, value: isSelected)
+                .animation(.bouncy, value: isSelected)
         }
     }
 }
