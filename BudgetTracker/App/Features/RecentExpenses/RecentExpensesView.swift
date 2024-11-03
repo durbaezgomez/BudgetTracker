@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 let mockExpenses: [Expense] = [
     .init(title: "Groceries", amount: 45.70, category: .food),
@@ -17,7 +18,9 @@ let mockExpenses: [Expense] = [
     .init(title: "Chocolate", amount: 15.00, category: .food),
 ]
 
-struct HomeView: View {
+struct RecentExpensesView: View {
+    let store: StoreOf<RecentExpenses>
+    
     var body: some View {
         ZStack {
             VStack {
@@ -26,19 +29,20 @@ struct HomeView: View {
                 ExpensesTopRow()
                 ScrollView {
                     VStack(spacing: 5) {
-                        ForEach(mockExpenses, id: \.id) { expense in
+                        ForEach(store.expenses, id: \.id) { expense in
                             ExpenseRow(expense: expense)
                             Divider()
                         }
                     }
                 }
                 .padding(.horizontal, 30)
+                .padding(.bottom, 10)
                 
                 HStack(spacing: 0) {
                     Spacer()
                     Button(
                         action: {
-                            // TODO: Add store action
+                            store.send(.addNewExpense(mockExpenses[1]))
                         }, label: {
                             Image(systemName: "plus")
                                 .resizable()
@@ -63,7 +67,7 @@ struct HomeView: View {
 }
 
 // Expense Row
-extension HomeView {
+extension RecentExpensesView {
     struct ExpenseRow: View {
         var expense: Expense
         
@@ -92,7 +96,7 @@ extension HomeView {
     }
 }
 
-extension HomeView {
+extension RecentExpensesView {
     struct ExpensesTopRow: View {
         var body: some View {
             HStack(spacing: 0) {
@@ -119,5 +123,11 @@ extension HomeView {
 }
 
 #Preview {
-    HomeView()
+    RecentExpensesView(
+        store: Store(
+            initialState: RecentExpenses.State(expenses: [])
+        ) {
+            RecentExpenses()
+        }
+    )
 }

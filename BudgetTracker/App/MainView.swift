@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct MainView: View {
     enum TabItem: Int, CaseIterable {
@@ -30,8 +31,11 @@ struct MainView: View {
                 TabView(selection: $selectedTab) {
                     StatsView()
                         .tag(0)
-                    HomeView()
-                        .tag(1)
+                    RecentExpensesView(
+                        store: Store(initialState: RecentExpenses.State()) {
+                            RecentExpenses()
+                        }
+                    ).tag(1)
                     BudgetView()
                         .tag(2)
                 }
