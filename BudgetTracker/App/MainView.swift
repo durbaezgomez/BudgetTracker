@@ -11,13 +11,13 @@ struct MainView: View {
     enum TabItem: Int, CaseIterable {
         case stats = 0
         case home
-        case addNew
+        case budget
         
         var icon: String {
             switch self {
             case .home: return "house"
-            case .stats: return "chart.pie.fill"
-            case .addNew: return "plus"
+            case .stats: return "chart.pie"
+            case .budget: return "wallet.bifold"
             }
         }
     }
@@ -31,7 +31,7 @@ struct MainView: View {
                     .tag(0)
                 HomeView()
                     .tag(1)
-                AddNewExpenseView()
+                BudgetView()
                     .tag(2)
             }
             
