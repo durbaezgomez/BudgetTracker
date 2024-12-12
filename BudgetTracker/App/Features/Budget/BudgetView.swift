@@ -9,10 +9,14 @@ import SwiftUI
 
 struct BudgetView: View {
     var body: some View {
-        Text("BudgetView")
+        ZStack {
+            VStack {
+                Spacer()
+                Text("Budget View")
+                Spacer()
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .background(Color.secondary)
     }
-}
-
-#Preview {
-    BudgetView()
 }

@@ -9,6 +9,14 @@ import SwiftUI
 
 struct StatsView: View {
     var body: some View {
-        Text("StatsView")
+        ZStack {
+            VStack {
+                Spacer()
+                Text("Stats View")
+                Spacer()
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .background(Color.secondary)
     }
 }

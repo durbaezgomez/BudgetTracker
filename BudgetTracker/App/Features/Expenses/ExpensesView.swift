@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  ExpensesView..swift
 //  BudgetTracker
 //
 //  Created by Dominik Urbaez Gomez on 03/11/2024.
@@ -18,23 +18,20 @@ let mockExpenses: [Expense] = [
     .init(title: "Chocolate", amount: 15.00, category: .food),
 ]
 
-struct RecentExpensesView: View {
-    let store: StoreOf<RecentExpenses>
+struct ExpensesView: View {
+    @Bindable var store: StoreOf<ExpensesDomain>
     
     var body: some View {
         ZStack {
             VStack {
-                Text("Recent expenses")
+                Text("Expenses")
                     .font(.Custom.headline)
                 ExpensesTopRow()
-                ScrollView {
-                    VStack(spacing: 5) {
-                        ForEach(store.expenses, id: \.id) { expense in
-                            ExpenseRow(expense: expense)
-                            Divider()
-                        }
-                    }
-                }
+//                List {
+//                    ForEach(store.expenses) { expense in
+//                        ExpenseRow(expense: expense)
+//                    }
+//                }
                 .padding(.horizontal, 30)
                 .padding(.bottom, 10)
                 
@@ -42,15 +39,15 @@ struct RecentExpensesView: View {
                     Spacer()
                     Button(
                         action: {
-                            store.send(.addNewExpense(mockExpenses[1]))
+                            store.send(.addExpenseTapped)
                         }, label: {
                             Image(systemName: "plus")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 20, height: 20)
-                                .padding(20)
+                                .padding(15)
                                 .foregroundColor(.white)
-                                .background(Color.secondary)
+                                .background(Color.primary.opacity(0.3))
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                                 .cornerRadius(10)
                         }
@@ -59,15 +56,22 @@ struct RecentExpensesView: View {
                 }
                 Spacer()
             }
-            .padding(.horizontal, 5)
         }
         .frame(maxWidth: .infinity)
-        .background(Color.secondary.opacity(0.5))
+        .background(Color.secondary)
+        .sheet(isPresented: $store.showAddExpense.sending(\.setSheet)) {
+            NewExpenseView(
+                store: Store(initialState: NewExpenseDomain.State())
+                { NewExpenseDomain()
+                }
+            )
+            .presentationDetents([.medium])
+        }
     }
 }
 
 // Expense Row
-extension RecentExpensesView {
+extension ExpensesView {
     struct ExpenseRow: View {
         var expense: Expense
         
@@ -89,14 +93,12 @@ extension RecentExpensesView {
                     .foregroundStyle(Color.accentSecondary)
                     .frame(width: 60, alignment: .center)
             }
-            .padding(.horizontal, 15)
-            .frame(width: 350, height: 35)
             .cornerRadius(5)
         }
     }
 }
 
-extension RecentExpensesView {
+extension ExpensesView {
     struct ExpensesTopRow: View {
         var body: some View {
             HStack(spacing: 0) {
@@ -116,18 +118,17 @@ extension RecentExpensesView {
             }
             .padding(.horizontal, 15)
             .frame(width: 350, height: 35)
-            .background(Color.secondary.opacity(0.3))
+            .background(Color.primary.opacity(0.1))
             .cornerRadius(5)
         }
     }
 }
 
 #Preview {
-    RecentExpensesView(
+    ExpensesView(
         store: Store(
-            initialState: RecentExpenses.State(expenses: [])
-        ) {
-            RecentExpenses()
+            initialState: ExpensesDomain.State()) {
+            ExpensesDomain()
         }
     )
 }

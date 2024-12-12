@@ -5,7 +5,7 @@
 //  Created by Dominik Urbaez Gomez on 03/11/2024.
 //
 
-enum Category {
+enum Category: CaseIterable {    
     case food
     case utilities
     case travel

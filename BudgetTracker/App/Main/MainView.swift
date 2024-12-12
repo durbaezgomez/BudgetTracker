@@ -31,9 +31,9 @@ struct MainView: View {
                 TabView(selection: $selectedTab) {
                     StatsView()
                         .tag(0)
-                    RecentExpensesView(
-                        store: Store(initialState: RecentExpenses.State()) {
-                            RecentExpenses()
+                    ExpensesView(
+                        store: Store(initialState: ExpensesDomain.State()) {
+                            ExpensesDomain()
                         }
                     ).tag(1)
                     BudgetView()
@@ -52,10 +52,11 @@ struct MainView: View {
                                 }
                             }
                     }
+                    .animation(.default, value: selectedTab)
                 }
                 .padding(.top, 20)
                 .frame(maxWidth: .infinity)
-                .background(Color.secondary.opacity(0.5))
+                .background(Color.secondary)
             }
         }
     }

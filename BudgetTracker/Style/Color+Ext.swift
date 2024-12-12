@@ -9,11 +9,11 @@ import SwiftUI
 
 extension Color {
     public static var primary: Color {
-        .init(#colorLiteral(red: 0.8588235294, green: 0.3137254902, blue: 0.2901960784, alpha: 1))
+        .init(#colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1))
     }
     
     public static var secondary: Color {
-        .init(#colorLiteral(red: 1, green: 0.4352941176, blue: 0.3490196078, alpha: 1))
+        .init(#colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1))
     }
     
     public static var accentPrimary: Color {
