@@ -22,9 +22,7 @@ struct ExpensesFeature {
     }
     
     var body: some ReducerOf<Self> {
-        Reduce {
-            state,
-            action in
+        Reduce { state, action in
             switch action {
             case .addButtonTapped:
                 state.addExpense = AddExpenseFeature.State(
@@ -36,20 +34,8 @@ struct ExpensesFeature {
                 )
                 return .none
                 
-            case .addExpense(.presented(.cancelTapped)):
-                state.addExpense = nil
-                return .none
-                
-            case .addExpense(.presented(.saveTapped)):
-                guard let note = state.addExpense?.note,
-                      let amount = state.addExpense?.amountDouble,
-                      let date = state.addExpense?.date,
-                      let category = state.addExpense?.category
-                else { return .none }
-                
-                let expense = Expense(id: UUID(), date: date, amount: amount, category: category, note: note)
+            case .addExpense(.presented(.delegate(.saveExpense(let expense)))):
                 state.expenses.append(expense)
-                state.addExpense = nil
                 return .none
                 
             case .addExpense:

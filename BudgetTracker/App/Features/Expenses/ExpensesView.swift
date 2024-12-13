@@ -106,13 +106,13 @@ private struct ExpenseRow: View {
                         .foregroundColor(.primary)
                 }
                 Spacer()
-                Text(String(format: "%.2f", expense.amount))
+                Text(String(format: "%.2f USD", expense.amount))
                     .font(.headline)
             }
             
             Text(expense.category.title)
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(expense.category.color)
             
             Text(expense.date, style: .date)
                 .font(.caption)

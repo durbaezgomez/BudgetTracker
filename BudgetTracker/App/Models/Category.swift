@@ -5,6 +5,8 @@
 //  Created by Dominik Urbaez Gomez on 03/11/2024.
 //
 
+import SwiftUI
+
 enum Category: CaseIterable {    
     case food
     case utilities
@@ -19,6 +21,16 @@ enum Category: CaseIterable {
         case .travel: return "Travel"
         case .savings: return "Savings"
         case .others: return "Other"
+        }
+    }
+    
+    var color: Color {
+        switch self {
+        case .food: return Color.green
+        case .utilities: return Color.blue
+        case .travel: return Color.yellow
+        case .savings: return Color.orange
+        case .others: return Color.purple
         }
     }
 }

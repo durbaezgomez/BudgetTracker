@@ -50,7 +50,7 @@ private struct DateAndCategorySection: View {
     var body: some View {
         Section(header: Text("Date and Category")) {
             HStack {
-                DatePicker("Date", selection: $store.date)
+                DatePicker("Date", selection: $store.date, displayedComponents: .date)
                     .datePickerStyle(.compact)
                     .labelsHidden()
                 Picker("",selection: $store.category) {
