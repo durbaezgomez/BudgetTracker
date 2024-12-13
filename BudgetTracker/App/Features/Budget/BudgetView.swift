@@ -17,6 +17,6 @@ struct BudgetView: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .background(Color.secondary)
+        .background(Color.background)
     }
 }

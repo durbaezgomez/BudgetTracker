@@ -27,4 +27,8 @@ extension Color {
     public static var tertiary: Color {
         .init(#colorLiteral(red: 0.6980392157, green: 0.6901960784, blue: 0.6078431373, alpha: 1))
     }
+    
+    public static var background: Color {
+        .init(#colorLiteral(red: 0.8666666667, green: 0.9333333333, blue: 0.9137254902, alpha: 1))
+    }
 }

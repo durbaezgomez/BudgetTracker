@@ -28,21 +28,22 @@ struct MainView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             VStack(spacing: 0) {
-                TabView(selection: $selectedTab) {
-                    StatsView()
-                        .tag(0)
-                    ExpensesView(
-                        store: Store(initialState: ExpensesDomain.State()) {
-                            ExpensesDomain()
-                        }
-                    ).tag(1)
-                    BudgetView()
-                        .tag(2)
-                }
-                .ignoresSafeArea()
-                .animation(.easeInOut, value: selectedTab)
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                
+                    TabView(selection: $selectedTab) {
+                        StatsView()
+                            .tag(0)
+                        
+                        ExpensesView(
+                            store: Store(initialState: ExpensesFeature.State()) {
+                                ExpensesFeature()
+                            }
+                        )
+                        .tag(1)
+                        
+                        BudgetView()
+                            .tag(2)
+                    }
+                    .animation(.easeInOut, value: selectedTab)
+                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 HStack {
                     ForEach(TabItem.allCases, id: \.self) { item in
                         MenuButton(isSelected: selectedTab == item.rawValue, icon: item.icon)
@@ -56,9 +57,10 @@ struct MainView: View {
                 }
                 .padding(.top, 20)
                 .frame(maxWidth: .infinity)
-                .background(Color.secondary)
+                .background(Color.background)
             }
         }
+        .background(Color.background)
     }
 }
 

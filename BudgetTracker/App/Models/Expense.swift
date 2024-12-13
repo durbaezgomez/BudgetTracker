@@ -7,12 +7,13 @@
 
 import Foundation
 
-struct Expense: Identifiable, Equatable {
-    var id: UUID = UUID()
-    var title: String
+struct Expense: Equatable, Identifiable {
+    var id: UUID
+    var date: Date
+    
     var amount: Double
-    var date: Date = Date()
     var category: Category
+    var note: String
     
     var dateString: String {
         date.formatted(.dateTime)
