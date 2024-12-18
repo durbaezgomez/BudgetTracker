@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct BudgetView: View {
+    @Bindable var store: StoreOf<BudgetFeature>
+
     var body: some View {
         ZStack {
             VStack {

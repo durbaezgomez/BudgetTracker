@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct StatsView: View {
+    @Bindable var store: StoreOf<StatsFeature>
+    
     var body: some View {
         ZStack {
             VStack {

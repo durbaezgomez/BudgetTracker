@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum Category: CaseIterable {    
+enum Category: CaseIterable, Codable {
     case food
     case utilities
     case travel

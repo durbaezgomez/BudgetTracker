@@ -6,12 +6,23 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct BudgetTrackerApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            AppView(
+                store: Store(
+                    initialState: AppFeature.State(
+                        expenses: ExpensesFeature.State(),
+                        stats: StatsFeature.State(),
+                        budget: BudgetFeature.State()
+                    )
+                ) {
+                    AppFeature()
+                }
+            )
         }
     }
 }

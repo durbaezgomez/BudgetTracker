@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Expense: Equatable, Identifiable {
+struct Expense: Equatable, Identifiable, Codable {
     var id: UUID
     var date: Date
     
